@@ -5,7 +5,7 @@ using namespace std;
 
 
 //动态规划解法
-class NumArray {
+class NumArray{
 public:
     vector<int> dp;
     NumArray(vector<int>& nums){
@@ -25,7 +25,7 @@ public:
 
 
 //线段树解法
-class NumArray {
+class NumArray{
 public:
     struct node{
         int left;
@@ -94,4 +94,61 @@ public:
     }
 };
 
+//sqrt分解
+class NumArray{
+public:
+    vector<int> num;
+    vector<int> sqrt_sum;
+    int len;
+    int len_nums; //和数组中和有多少个数组组成
+    int len_sum;//和数组长度
+    // 0-len_nums-1;len_nums-len_nums*2-1......
+    //后面有部分没有被记录在sqrt_sum里面，从len_sum*len_nums->len-1
+    NumArray(vector<int>& nums):num(nums){
+        len=nums.size();
+        if(len==0)return;
+        len_nums=sqrt(len);
+        len_sum=len/len_nums;
+        sqrt_sum=vector<int>(len_sum,0);
+        for(int i=0;i<len_sum;i++){
+            for(int j=0;j<len_nums;j++){
+                sqrt_sum[i]+=num[i*len_nums+j];
+            }
+        }
+    }
+    void update(int i,int val) {
+        if(i>=len||i<0)return;
+        int diff=val-num[i];
+        num[i]=val;
+        if(i<len_sum*len_nums){
+            sqrt_sum[i/len_nums]+=diff;
+        }
+    }
+    int sumRange(int i, int j) {
+        int l=i/len_nums,r=j/len_nums;
+        if(l==r||l+1==r){
+            int sum=0;
+            for(int k=i;k<=j;k++)sum+=num[k];
+            return sum;
+        }
+        else{
+            int sum=0;
+            for(int k=l+1;k<r;k++)sum+=sqrt_sum[k];
+            for(int k=i;k<(l+1)*len_nums;k++)sum+=num[k];
+            for(int k=j;k>=r*len_nums;k--)sum+=num[k];
+            return sum;
+        }
+    }
+};
+int main()
+{
+    vector<int> nums{7,2,7,2,0};
+    NumArray obj(nums);
+    obj.update(4,6);
+    obj.update(0,2);
+    obj.update(0,9);
+    obj.update(3,8);
+    cout << obj.sumRange(0,4);
+    return 0;
+}
 

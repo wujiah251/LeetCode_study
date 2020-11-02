@@ -8,6 +8,7 @@
         "cmath": "cpp",
         "bitset": "cpp",
         "vector": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "*.区域和检索cpp": "cpp"
     }
 }
