@@ -4,10 +4,14 @@
             "name": "Win32",        
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:/Debug/Homework/test/include",
-                "C:/Users/wujiahao/Desktop/code/c++ code/刷题"
+                "C:/Debug/Homework/test/include"
             ],
-            "defines": [],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "__GNUC__=6",
+                "__cdecl=__attribute__((__cdecl__))"
+            ],
             "compilerPath": "C://TDM-GCC-64//bin//g++.exe", 
             "cStandard": "c11",
             "cppStandard": "c++17",
