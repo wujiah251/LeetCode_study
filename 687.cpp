@@ -1,5 +1,5 @@
 #include<iostream>
-#include<camth>
+#include<cmath>
 using namespace std;
 
 
