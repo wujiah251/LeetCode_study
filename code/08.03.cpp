@@ -21,7 +21,7 @@ public:
     int findMagicIndex(vector<int>& nums){
         int len=nums.size();
     }
-}
+};
 
 int main()
 {
